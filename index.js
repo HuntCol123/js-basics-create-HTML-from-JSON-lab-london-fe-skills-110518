@@ -34,9 +34,9 @@ const score = movies.Titanic.audienceScore;
 
 document.getElementById("audienceScore").innerHTML = score;
 
-const poster = movies.Titanic.poster;
+const posters = movies.Titanic.poster;
 
-document.getElementById("poster").innerHTML = poster;
+document.getElementById("poster").innerHTML = posters;
 
 
 function populateCast(){  
