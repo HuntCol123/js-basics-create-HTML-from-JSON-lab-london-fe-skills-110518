@@ -10,11 +10,13 @@ function handleJSON(movie) {
     document.getElementById('audienceScore').innerHTML = json.audienceScore
     document.getElementById('cast').innerHTML = ""
     document.getElementById('reviews').innerHTML = ""
+    
     json.cast.forEach(star => {
       let div = document.createElement('div')
       div.innerHTML = `<span>${star.actor}</span><span>${star.role}</span>`
       document.getElementById('cast').appendChild(div)
     })
+    
     json.reviews.forEach(review => {
       let div = document.createElement('div')
       div.innerHTML = `<div>${review.content}</div><div>-${review.username}</div>`
