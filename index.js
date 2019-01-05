@@ -1,70 +1,38 @@
+function handleJSON(movie) {
 
-const button = document.getElementById('Titanic');
-
-button.addEventListener('click', function() {
-  populateTitanic();
-})
-
-
- 
- function populateTitanic () {
-  
-
-  const title =  movies.Titanic.title;
-  
-  document.getElementById('title').innerHTML = title;
-  
-  const director = movies.Titanic.director
-  
-document.getElementById("director").innerHTML = director;
- 
- const genre = movies.Titanic.genre;
- 
- document.getElementById("genre").innerHTML = genre;
- 
- const filmRating = movies.Titanic.filmRating;
-  
-document.getElementById("filmRating").innerHTML = filmRating;
-
- const movieDescription = movies.Titanic.description;
-  
-document.getElementById("description").innerHTML = movieDescription;
-
-const score = movies.Titanic.audienceScore;
-
-document.getElementById("audienceScore").innerHTML = score;
-
-const posters = movies.Titanic.poster;
-
-document.getElementById("poster").src = posters;
-
-
-function populateCast(){  
-
-var a = [];
-movies.Titanic.cast.forEach(function(obj){
-a.push(obj.role,obj.actor);
-
-
-});
-
-document.getElementById("cast").innerHTML = a
-
-
+    let json = movies[movie]
+    document.getElementById('title').innerHTML = json.title
+    document.getElementById('director').innerHTML = json.director
+    document.getElementById('genre').innerHTML = json.genre
+    document.getElementById('filmRating').innerHTML = json.filmRating
+    document.getElementById('poster').src=json.poster
+    document.getElementById('description').innerHTML = json.description
+    document.getElementById('audienceScore').innerHTML = json.audienceScore
+    document.getElementById('cast').innerHTML = ""
+    document.getElementById('reviews').innerHTML = ""
+    json.cast.forEach(star => {
+      let div = document.createElement('div')
+      div.innerHTML = `<span>${star.actor}</span><span>${star.role}</span>`
+      document.getElementById('cast').appendChild(div)
+    })
+    json.reviews.forEach(review => {
+      let div = document.createElement('div')
+      div.innerHTML = `<div>${review.content}</div><div>-${review.username}</div>`
+      document.getElementById('reviews').appendChild(div)
+    })
 }
 
-populateCast();
+function handleButton(event) {
+    handleJSON(event.target.id)
 }
 
 
+window.onload = () => {
 
+  handleJSON("Titanic")
 
-
-
-
-//document.addEventListener("DOMContentloaded", (e) => {
-//  });
-
-
-
-
+  let buttons = document.getElementsByTagName('button')
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener('click', handleButton)
+  }
+};
